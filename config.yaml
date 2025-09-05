@@ -10,10 +10,14 @@ arch:
   - aarch64
 startup: application
 boot: auto
+ports:
+  80/tcp: 8080
+image: "ghcr.io/marcus198006/virtual-shelly-3em-{arch}"
 options:
   venus_ip: "192.168.1.120"
   protocol: "rpc1010"
 schema:
   venus_ip: str
   protocol: list(rpc1010|coiot)
+
 
