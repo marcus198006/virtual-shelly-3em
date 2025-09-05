@@ -1,0 +1,18 @@
+name: "Virtual Shelly 3EM"
+version: "1.0.0"
+slug: "virtual_shelly_3em"
+description: "Emuliert einen Shelly 3EM und speist Tasmota-/MQTT-Daten für den Venus E 3.0 ein."
+url: "https://github.com/dein-repo/virtual_shelly_3em"
+arch:
+  - amd64
+  - armv7
+  - armhf
+  - aarch64
+startup: application
+boot: auto
+options:
+  venus_ip: "192.168.1.120"
+  protocol: "rpc1010"
+schema:
+  venus_ip: str
+  protocol: list(rpc1010|coiot)
