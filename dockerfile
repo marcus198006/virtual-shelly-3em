@@ -1,11 +1,15 @@
-ARG BUILD_FROM
-FROM ${BUILD_FROM}
+FROM alpine:3.18
 
-RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-pip && rm -rf /var/lib/apt/lists/*
+# Python installieren
+RUN apk add --no-cache python3 py3-pip
 
 WORKDIR /usr/src/app
+
+# Dependencies
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Skript kopieren
 COPY virtual_shelly_3em.py .
 COPY run.sh .
 RUN chmod +x run.sh
