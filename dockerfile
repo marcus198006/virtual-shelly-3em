@@ -1,7 +1,11 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:latest
 FROM ${BUILD_FROM}
 
-RUN apk add --no-cache python3 py3-pip
+# Debian-Pakete installieren
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends python3 python3-pip && \
+    rm -rf /var/lib/apt/lists/*
+
 WORKDIR /usr/src/app
 
 COPY requirements.txt .
