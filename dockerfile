@@ -1,17 +1,22 @@
-ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:latest
-FROM debian:bullseye-slim
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends python3 python3-pip && \
-    rm -rf /var/lib/apt/lists/*
+name: "Virtual Shelly 3EM"
+version: "1.0.0"
+slug: "virtual_shelly_3em"
+description: "Virtual Shelly 3EM integration for Home Assistant"
+arch:
+  - amd64
+image: "ghcr.io/marcus198006/virtual-shelly-3em-{arch}"
+startup: application
+boot: auto
+map:
+  - share:rw
+  - config:rw
+options:
+  mqtt_host: "localhost"
+  mqtt_port: 1883
+schema:
+  mqtt_host: str
+  mqtt_port: int
+ports:
+  "80/tcp": null  # Adjust if your script exposes a web server
 
-WORKDIR /usr/src/app
-
-COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
-
-COPY virtual_shelly_3em.py .
-COPY run.sh .
-RUN chmod +x run.sh
-
-CMD [ "/usr/src/app/run.sh" ]
 
