@@ -1,5 +1,7 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:latest
-FROM debian:bullseye-slim
+FROM ${BUILD_FROM}
+
+# Debian-Pakete installieren
 RUN apt-get update && \
     apt-get install -y --no-install-recommends python3 python3-pip && \
     rm -rf /var/lib/apt/lists/*
