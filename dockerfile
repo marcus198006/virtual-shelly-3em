@@ -1,7 +1,5 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:latest
-FROM ${BUILD_FROM}
-
-# Debian-Pakete installieren
+FROM debian:bullseye-slim
 RUN apt-get update && \
     apt-get install -y --no-install-recommends python3 python3-pip && \
     rm -rf /var/lib/apt/lists/*
@@ -16,3 +14,4 @@ COPY run.sh .
 RUN chmod +x run.sh
 
 CMD [ "/usr/src/app/run.sh" ]
+
