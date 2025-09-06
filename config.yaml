@@ -11,14 +11,35 @@ arch:
 startup: application
 boot: auto
 ports:
-  80/tcp: 8080
+  80/tcp: 8080  # optional, nur wenn Web UI benötigt
 image: "ghcr.io/marcus198006/virtual-shelly-3em"
+
 options:
   venus_ip: "192.168.1.120"
   protocol: "rpc1010"
+  mqtt_username: ""
+  mqtt_password: ""
+  mqtt_host: "192.168.178.23"
+  mqtt_port: 1883
+  topics:
+    net_power_w: "home/energy/net_power_w"
+    pv_production_w: "home/energy/pv_production_w"
+    net_feed_power: "home/energy/net_feed_power"
+
 schema:
   venus_ip: str
-  protocol: list(rpc1010|coiot)
-
-
-
+  protocol:
+    type: str
+    enum:
+      - rpc1010
+      - coiot
+  mqtt_username: str
+  mqtt_password: str
+  mqtt_host: str
+  mqtt_port: int
+  topics:
+    type: object
+    properties:
+      net_power_w: str
+      pv_production_w: str
+      net_feed_power: str
